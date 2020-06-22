@@ -13,7 +13,6 @@ module.exports = {
     base: process.env.AIRTABLE_BASE
   },
   mail: {
-    api_key: process.env.SENDGRID_KEY,
-    from: process.env.MAILER_FROM,
+    api_key: process.env.SENDGRID_KEY
   },
 };
