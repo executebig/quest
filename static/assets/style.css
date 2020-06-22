@@ -1,0 +1,59 @@
+@import url("https://rsms.me/inter/inter.css");
+
+html, body, button, input, select, textarea {
+  font-family: "Inter", sans-serif!important;
+}
+@supports (font-variation-settings: normal) {
+  html, body, button, input, select, textarea {
+    font-family: "Inter var", sans-serif!important;
+  }
+}
+
+
+span.is-branding {
+    color: #266dd3;
+    font-weight: 800;
+}
+
+img.is-logo {
+    margin: 0 20px;
+    padding: 0 5px;
+}
+
+a.is-disabled {
+    color: gray;
+    cursor: not-allowed;
+}
+
+.container.main {
+  margin: 2rem auto;
+}
+
+.panel-heading .hint {
+  font-size: 70%;
+  opacity: .6;
+}
+
+.panel-heading .live-dot {
+  margin: 10px;
+  color: #e42d42;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .2;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.button {
+  border-radius: 5px!important;
+}

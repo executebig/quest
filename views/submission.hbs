@@ -1,0 +1,112 @@
+{{#extend "head-inject"}}
+<style>
+    td:nth-child(1) {
+        font-weight: 800;
+        text-align: right !important;
+    }
+
+    .submitted td:nth-child(1) {
+        width: 20%;
+    }
+</style>
+{{/extend}}
+
+{{#data}}
+<nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+        <li><a href="/">Quest</a></li>
+        <li class="is-active"><a href="/submission/{{id}}">Submission #{{Autonumber}}</a></li>
+    </ul>
+</nav>
+
+<div class="columns">
+    <div class="column">
+        <h1 class="title is-3">Submitted Data</h1>
+
+        <table class="table is-fullwidth is-hoverable submitted">
+            <tbody>
+                <tr>
+                    <td>Submission ID</td>
+                    <td>{{Autonumber}}</td>
+                </tr>
+                <tr>
+                    <td>Event Name</td>
+                    <td>{{"Event Name"}}</td>
+                </tr>
+                <tr>
+                    <td>Event Logo</td>
+                    <td>{{#if Logo}}<img src="{{Logo.0.url}}" style="height: 100px;">{{else}}Not Submitted{{/if}}</td>
+                </tr>
+                <tr>
+                    <td>Event Contact</td>
+                    <td>{{"Event Contact"}}</td>
+                </tr>
+                <tr>
+                    <td>Contact Email</td>
+                    <td><a href="mailto:{{"Contact Email"}}">{{"Contact Email"}}</a></td>
+                </tr>
+                <tr>
+                    <td>Event Location</td>
+                    <td><a href="http://maps.google.com/?q={{"Event Location"}}"
+                            target="_blank">{{"Event Location"}}</a></td>
+                </tr>
+                <tr>
+                    <td>Event Start</td>
+                    <td>{{"Event Date"}}</td>
+                </tr>
+                <tr>
+                    <td>Data Sheet</td>
+                    <td><a class="button is-small is-link" href="{{Sheet.0.url}}">
+                            <span class="icon is-small">
+                                <i class="fas fa-download"></i>
+                            </span><span>Download</span></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="column is-one-third">
+        <h1 class="title is-3">Statistics (Unfinished)</h1>
+        <p class="subtitle is-6">Staff instructions: Please interpret data from the data sheet and enter the key metrics
+            here.</p>
+        <form>
+            <table class="table is-fullwidth is-hoverable">
+                <tbody>
+                    <tr>
+                        <td>Registered</td>
+                        <td><input class="input is-small" type="number" value="{{Autonumber}}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Attended</td>
+                        <td><input class="input is-small" type="number" value="{{Autonumber}}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Gender URM</td>
+                        <td><input class="input is-small" type="number" value="{{Autonumber}}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Racial URM</td>
+                        <td><input class="input is-small" type="number" value="{{Autonumber}}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+
+                        </td>
+                        <td>
+                            <button class="button is-small is-link is-fullwidth">Update</button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+<a href="" class="button is-pulled-left is-dark">Previous</a>
+<a href="" class="button is-pulled-right is-dark">Next</a>
+
+{{/data}}
