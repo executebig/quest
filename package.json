@@ -14,6 +14,7 @@
     "express-handlebars": "^4.0.4",
     "express-minify-html": "^0.12.0",
     "handlebars-dateformat": "^1.1.1",
+    "lodash.merge": "^4.6.2",
     "node-fetch": "^2.6.0",
     "remove-markdown": "^0.3.0",
     "showdown": "^1.9.1"
