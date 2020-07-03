@@ -1,0 +1,14 @@
+<div class="field">
+  <label class="label{{#if required}} required{{/if}}">{{label}}</label>
+  <div class="control">
+    <div class="select{{#if multiple}} is-multiple{{/if}}">
+      <select{{#if multiple}} multiple size="{{size}}"{{/if}} name="{{name}}"{{#if required}} required{{/if}}>
+        {{#unless multiple}}<option value="">&mdash;</option>{{/unless}}
+        {{#each option}}
+        <option value="{{value}}">{{option}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+  <p class="help">{{help}}</p>
+</div>

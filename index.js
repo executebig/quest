@@ -19,25 +19,62 @@ const { Converter } = require("showdown");
 
 const hbs = exphbs.create({ helpers: helpers, extname: ".hbs" });
 
-// Protect full site with simple auth
-app.use(basicAuth({ users: { [config.login.user]: config.login.password }, challenge: true }));
 app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use("/static", express.static(path.join(__dirname, "static")));
+
 app.get("/", (req, res) => {
+  res.render("landing", { title: "Collection" })
+})
+
+app.post("/", async (req, res) => {
+  let email = req.body ? req.body.email : ""
+
+  if (addrCheck(email)) {
+    let record;
+  
+    record = await data.getRecByEmail(email)
+
+    if (record.length > 0) {
+      record[0]._rawJson.fields.id = record[0]._rawJson.id
+      res.render("collection", {title: "Continue", data: record[0]._rawJson.fields})
+    } else {
+      res.render("collection", {title: "Error", email: email })
+    }
+
+  } else {
+    res.render("collection", {title: "Error", email: email})
+  }
+})
+
+app.post("/update/:id", async (req, res) => {
+
+  await data.updateRecord(req.params.id, req.body)
+  
+  res.redirect("/submitted")
+})
+
+// Protect full site with simple auth
+const adminRouter = express.Router()
+app.use("/admin", adminRouter)
+
+adminRouter.use(basicAuth({ users: { [config.login.user]: config.login.password }, challenge: true }));
+
+adminRouter.get("/", (req, res) => {
   submissions = data.loadSubmissions();
   let submissionsPromise = Promise.resolve(submissions);
-  submissionsPromise.then((d) => {
-    res.render("dashboard", { title: "Dashboard", data: d, n: d.length });
+  submissionsPromise.then(d => {
+    res.render("dashboard", { title: "Dashboard", layout: 'admin', data: d, n: d.length });
   });
 });
 
-app.get("/email", (req, res) => {
-  res.render("email", { title: "Auto Email" });
+adminRouter.get("/email", (req, res) => {
+  res.render("email", { title: "Auto Email", layout: 'admin' });
 });
 
-app.post("/email", (req, res) => {
+adminRouter.post("/email", (req, res) => {
   // Accept variables
   let to = req.body.to.split(",").map(d => d.trim());
   let from = req.body.from;
@@ -64,16 +101,14 @@ app.post("/email", (req, res) => {
   
 });
 
-app.get("/submission/:id", (req, res) => {
+adminRouter.get("/submission/:id", (req, res) => {
   submission = data.getDataById(req.params.id);
   let submissionPromise = Promise.resolve(submission);
   submissionPromise.then((d) => {
     console.log(d);
-    res.render("submission", { title: `Submission #${d[0]["Autonumber"]}`, data: d[0], noTabs: true });
+    res.render("submission", { title: `Submission #${d[0]["Autonumber"]}`, layout: 'admin', data: d[0], noTabs: true });
   });
 });
-
-app.use("/static", express.static(path.join(__dirname, "static")));
 // console.log(mailer.send("hi@mingjie.dev", "This is a test message", "<h1>Test HTML content</h1><strong>Bold Content</strong>", "Test text content. Not bold content"))
 
 app.listen(config.port, () => console.log(`Quest listening at ${config.host}`));

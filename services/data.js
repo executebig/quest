@@ -43,4 +43,44 @@ const getDataById = async (rid) => {
   return data;
 };
 
-module.exports = { loadSubmissions, getDataById };
+const getRecByEmail = async (email) => {
+  return new Promise((resolve, reject) => {
+    let results = base("Submissions").select({
+      view: "Incomplete",
+      filterByFormula: `{Contact Email} = "${email}"`
+    }).all()
+
+    resolve(results)
+  })
+}
+
+const updateRecord = async (rid, d) => {
+
+  return new Promise((resolve, reject) => {
+    base('Submissions').update(rid, {
+      "Complete": true,
+      "Website": d.website,
+      "Scope": d.scope,
+      "Demographic Restrictions": d.demRes,
+      "Finaid": d.finaid,
+      "Application Tags": d.application,
+      "Budget Range": d.budget,
+      "Marketing": d.marketing,
+      "Mentors": d.mentors === "TRUE",
+      "Workshops": d.workshops === "TRUE",
+      "Lead Profiles": d.displayLead === "TRUE",
+      "Leadership": d.leadership,
+      "Attrition": 1 - Number(d.attendance) / 100,
+      "Projects Submitted": d.projects
+    }, {typecast:true}, function(err, record) {
+      if (err) {
+        reject(err)
+        console.log(err)
+      }
+      
+      resolve()
+    })
+  })
+}
+
+module.exports = { loadSubmissions, getDataById, getRecByEmail, updateRecord };

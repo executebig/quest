@@ -1,6 +1,6 @@
 {
   "name": "eb-quest",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Quest is Execute Big Research's CRM.",
   "main": "index.js",
   "license": "MIT",
@@ -11,6 +11,7 @@
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
     "express-handlebars": "^4.0.4",
+    "handlebars-dateformat": "^1.1.1",
     "node-fetch": "^2.6.0",
     "remove-markdown": "^0.3.0",
     "showdown": "^1.9.1"

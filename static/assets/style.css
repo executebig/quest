@@ -57,3 +57,21 @@ a.is-disabled {
 .button {
   border-radius: 5px!important;
 }
+
+.hero.is-brand {
+  background-color: #266dd3;
+}
+
+.hero.is-brand .is-branding {
+  color: #fff;
+}
+
+.field {
+  margin-top: 2rem;
+}
+
+.label.required::after {
+  content: '*';
+  color: #e42d40;
+  margin-left: 2px;
+}

@@ -13,13 +13,16 @@
 </head>
 
 <body>
-    <section class="hero is-dark is-brand">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title"><span class="is-branding">Execute Big</span> Quest &ndash; {{title}}</h1>
-            </div>
+    <section class="section">
+        <div class="container">
+            <h1 class="title"><span class="is-branding">Execute Big</span> Quest &ndash; {{title}}</h1>
+            <p class="subtitle">The centralized toolkit & CRM for the research project.</p>
         </div>
     </section>
+
+    {{#unless noTabs}}
+        {{> tabs}}
+    {{/unless}}
 
     <div class="container main">
         {{{body}}}
