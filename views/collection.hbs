@@ -46,7 +46,7 @@
     help="Leave blank if no restrictions. High school-only/College-only events do not count."
   }}
 
-  {{>question/input label="Were you able to provide any financial assistance or travel aid for students in need? If so, please enter an estimated amount. If not, please enter \"0\"."
+  {{>question/input label="Were you able to provide any financial assistance or travel aid for students in need? If so, please enter an estimated total. If not, please enter \"0\"."
     type="number" placeholder="0" name="finaid"
     icon="dollar-sign" min="0" required=true
   }}
@@ -125,7 +125,7 @@
   </div>
   <div class="message-body">
     We cannot find an event associated with the email address <code>{{email}}</code>. Your address may be invalid, or
-    you may already have submitted the form for your event. Please double check, and if you believe that this is an error, please reach out to
+    you may have already submitted the form for your event. Please double check. If you believe this is an error, please reach out to
     <a href="mailto:mingjie@executebig.org">mingjie@executebig.org</a> for assistance. Thank you!
   </div>
 </article>
