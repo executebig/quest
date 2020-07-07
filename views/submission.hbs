@@ -21,7 +21,13 @@
 
 <div class="columns">
     <div class="column">
-        <h1 class="title is-3">{{Autonumber}}. {{"Event Name"}}</h1>
+        <h1 class="title is-3">{{Autonumber}}. {{"Event Name"}}
+            {{#if Complete}}
+                <span class="tag is-success">Completed</span>
+            {{else}}
+                <span class="tag is-warning">Pending</span>
+            {{/if}}
+        </h1>
 
         <table class="table is-fullwidth is-hoverable submitted">
             <tbody>
@@ -50,6 +56,9 @@
                     <td>Event End</td>
                     <td>{{formatDate End "MMMM Do YYYY, ha"}}</td>
                 </tr>
+
+                {{#if Complete}}
+
                 <tr>
                     <td>Scope</td>
                     <td>{{Scope}}</td>
@@ -67,7 +76,7 @@
                 </tr>
                 <tr>
                     <td>Financial Aid</td>
-                    <td>${{Finaid}} ({{percentage Finaid Budget}})</td>
+                    <td>${{Finaid}} ({{percentage Finaid Budget}} of budget)</td>
                 </tr>
                 <tr>
                     <td>Marketing</td>
@@ -75,28 +84,42 @@
                 </tr>
                 <tr>
                     <td>Mentors</td>
-                    <td>{{Mentors}}</td>
+                    <td>{{tf Mentors}}</td>
                 </tr>
                 <tr>
                     <td>Workshops</td>
-                    <td>{{Workshops}}</td>
+                    <td>{{tf Workshops}}</td>
                 </tr>
+                {{#if Notes}}
                 <tr>
                     <td>Notes</td>
                     <td>{{Notes}}</td>
                 </tr>
+                {{/if}}
                 <tr>
                     <td>Leadership</td>
                     <td><textarea class="textarea" readonly>{{Leadership}}</textarea></td>
                 </tr>
                 <tr>
                     <td>Lead Displayed</td>
-                    <td>{{"Lead Profiles"}}</td>
+                    <td>{{tf (lookup this "Lead Profiles")}}</td>
                 </tr>
                 <tr>
                     <td>Attrition</td>
                     <td>{{percentage Attrition 1}}</td>
                 </tr>
+                <tr>
+                    <td>Hackathon?</td>
+                    <td>{{tf isHackathon}}</td>
+                </tr>
+                {{#if isHackathon}}
+                <tr>
+                    <td>Projects Submitted</td>
+                    <td>{{"Projects Submitted"}}</td>
+                </tr>
+                {{/if}}
+
+                {{/if}}
             </tbody>
         </table>
     </div>

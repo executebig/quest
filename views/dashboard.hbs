@@ -4,11 +4,20 @@
   </p>
   {{#each data}}
   <a class="panel-block is-active" href="/admin/submission/{{id}}">
-    <strong>{{Autonumber}}. {{"Event Name"}}</strong>&ensp;<span class="tag is-dark">{{formatDate Start "MMMM Do YYYY, ha"}}</span>&ensp;<span
+    <strong>{{Autonumber}}. {{"Event Name"}}</strong>&ensp;<span
+      class="tag is-dark">{{formatDate Start "MMMM YYYY"}}</span>&ensp;<span
       class="tag is-warning">{{#if Online}}Online{{else}}{{"Event Location"}}{{/if}}</span>
 
+    {{#if Complete}}
+    &ensp;<span class="tag is-info">{{Scope}}</span>
+    {{/if}}
+
     <div style="position: absolute; right: 15px;">
-        <span class="tag">{{id}}</span>
+      {{#if Complete}}
+      <span class="tag is-success">Completed</span>
+      {{else}}
+      <span class="tag is-warning">Pending</span>
+      {{/if}}
     </div>
   </a>
   {{/each}}
