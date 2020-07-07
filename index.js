@@ -68,7 +68,7 @@ app.post("/", async (req, res) => {
 app.post("/update/:id", async (req, res) => {
   await data.updateRecord(req.params.id, req.body);
 
-  res.redirect("/submitted");
+  res.redirect("https://research.executebig.org/thanks.html");
 });
 
 // Protect full site with simple auth
