@@ -21,18 +21,10 @@
 
 <div class="columns">
     <div class="column">
-        <h1 class="title is-3">Submitted Data</h1>
+        <h1 class="title is-3">{{Autonumber}}. {{"Event Name"}}</h1>
 
         <table class="table is-fullwidth is-hoverable submitted">
             <tbody>
-                <tr>
-                    <td>Submission ID</td>
-                    <td>{{Autonumber}}</td>
-                </tr>
-                <tr>
-                    <td>Event Name</td>
-                    <td>{{"Event Name"}}</td>
-                </tr>
                 <tr>
                     <td>Event Logo</td>
                     <td>{{#if Logo}}<img src="{{Logo.0.url}}" style="height: 100px;">{{else}}Not Submitted{{/if}}</td>
@@ -47,12 +39,20 @@
                 </tr>
                 <tr>
                     <td>Event Location</td>
-                    <td><a href="http://maps.google.com/?q={{"Event Location"}}"
-                            target="_blank">{{"Event Location"}}</a></td>
+                    <td>{{#if Online}}Online{{else}}<a href="http://maps.google.com/?q={{"Event Location"}}"
+                            target="_blank">{{"Event Location"}}</a>{{/if}}</td>
                 </tr>
                 <tr>
                     <td>Event Start</td>
-                    <td>{{"Event Date"}}</td>
+                    <td>{{formatDate Start "MMMM Do YYYY, ha"}}</td>
+                </tr>
+                <tr>
+                    <td>Event End</td>
+                    <td>{{formatDate End "MMMM Do YYYY, ha"}}</td>
+                </tr>
+                <tr>
+                    <td>Scope</td>
+                    <td>{{Scope}}</td>
                 </tr>
                 <tr>
                     <td>Data Sheet</td>
@@ -60,6 +60,42 @@
                             <span class="icon is-small">
                                 <i class="fas fa-download"></i>
                             </span><span>Download</span></a></td>
+                </tr>
+                <tr>
+                    <td>Budget Range</td>
+                    <td>${{Budget}}</td>
+                </tr>
+                <tr>
+                    <td>Financial Aid</td>
+                    <td>${{Finaid}} ({{percentage Finaid Budget}})</td>
+                </tr>
+                <tr>
+                    <td>Marketing</td>
+                    <td>{{Marketing}}</td>
+                </tr>
+                <tr>
+                    <td>Mentors</td>
+                    <td>{{Mentors}}</td>
+                </tr>
+                <tr>
+                    <td>Workshops</td>
+                    <td>{{Workshops}}</td>
+                </tr>
+                <tr>
+                    <td>Notes</td>
+                    <td>{{Notes}}</td>
+                </tr>
+                <tr>
+                    <td>Leadership</td>
+                    <td><textarea class="textarea" readonly>{{Leadership}}</textarea></td>
+                </tr>
+                <tr>
+                    <td>Lead Displayed</td>
+                    <td>{{"Lead Profiles"}}</td>
+                </tr>
+                <tr>
+                    <td>Attrition</td>
+                    <td>{{percentage Attrition 1}}</td>
                 </tr>
             </tbody>
         </table>

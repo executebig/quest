@@ -64,7 +64,7 @@ const updateRecord = async (rid, d) => {
       "Demographic Restrictions": d.demRes,
       "Finaid": d.finaid,
       "Application Tags": d.application,
-      "Budget Range": d.budget,
+      "Budget": d.budget,
       "Marketing": d.marketing,
       "Mentors": d.mentors === "TRUE",
       "Workshops": d.workshops === "TRUE",
