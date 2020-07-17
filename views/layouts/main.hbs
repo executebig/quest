@@ -13,19 +13,21 @@
 </head>
 
 <body>
-    <section class="hero is-dark is-brand">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title"><span class="is-branding">Execute Big</span> Quest &ndash; {{title}}</h1>
+    <div class="Site-Content">
+        <section class="hero is-dark is-brand">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title"><span class="is-branding">Execute Big</span> Quest &ndash; {{title}}</h1>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="container main">
-        {{{body}}}
-        
-        {{>footer}}
+        <div class="container main">
+            {{{body}}}
+        </div>
     </div>
+    
+    {{>footer}}
 
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     {{{block 'foot-inject'}}}

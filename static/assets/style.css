@@ -10,6 +10,16 @@ html, body, button, input, select, textarea {
   }
 }
 
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-Content {
+  flex: 1;
+}
+
 .hero {
   user-select: none;
 }
@@ -102,4 +112,12 @@ a.is-disabled {
 
 #serverStat {
   font-size: 14px;
+}
+
+.footer {
+  padding-bottom: 3em;
+}
+
+.is-hint {
+  color: lightslategrey;
 }

@@ -13,22 +13,24 @@
 </head>
 
 <body>
-    <section class="section">
-        <div class="container">
-            <h1 class="title"><span class="is-branding">Execute Big</span> Quest &ndash; {{title}}</h1>
-            <p class="subtitle">The centralized toolkit & CRM for the research project.</p>
-        </div>
-    </section>
+    <div class="Site-Content">
+        <section class="section">
+            <div class="container">
+                <h1 class="title"><span class="is-branding">Execute Big</span> Quest &ndash; {{title}}</h1>
+                <p class="subtitle">The centralized toolkit & CRM for the research project.</p>
+            </div>
+        </section>
 
-    {{#unless noTabs}}
+        {{#unless noTabs}}
         {{> tabs}}
-    {{/unless}}
+        {{/unless}}
 
-    <div class="container main">
-        {{{body}}}
-        
-        {{>footer}}
+        <div class="container main">
+            {{{body}}}
+        </div>
     </div>
+    
+    {{>footer}}
 
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     {{{block 'foot-inject'}}}

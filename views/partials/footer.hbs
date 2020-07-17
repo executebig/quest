@@ -1,7 +1,19 @@
 <br />
 
-<a id="copyright">&copy;2020 Execute Big</a>
-<p id="serverStat" class="hidden"></p>
+<div class="footer">
+    <div class="content container">
+        {{#if userData}}
+        <p class="is-pulled-right has-text-right" style="font-size: 14px;"><strong
+                style="color: red;">***CONFIDENTIAL AREA***</strong><br />Access: <strong>{{userData.name}}</strong>. <a
+                href="/auth/logout">Log Out »</a><br /><span class="is-hint">{{userData.email}}</span></p>
+        {{else}}
+        <p class="is-pulled-right has-text-right" style="font-size: 14px;">Admin: <a href="/admin">Log In »</a><br /><span class="is-hint">Use Execute Big account.</span></p>
+        {{/if}}
+
+        <a id="copyright">&copy;2020 Execute Big</a>
+        <p id="serverStat" class="hidden"></p>
+    </div>
+</div>
 
 {{#extend "foot-inject"}}
 <script>
@@ -10,25 +22,25 @@
     document.getElementById("copyright").addEventListener("click", () => {
         if (!statLoaded) {
             fetch('https://api.github.com/repos/executebig/quest/commits') // Call the fetch function passing the url of the API as a parameter
-            .then(d => d.json())
-            .then(data => {
-                document.getElementById("serverStat").innerHTML += `
+                .then(d => d.json())
+                .then(data => {
+                    document.getElementById("serverStat").innerHTML += `
                 <strong>Last Update</strong>: ${new Date(data[0].commit.committer.date).toLocaleString("en-US")}<br />
                 <strong>Git Commit</strong>: <a href="${data[0].html_url}" target="blank">${data[0].sha}</a> by <a href="${data[0].committer.html_url}" target="blank">@${data[0].author.login}</a><br />
                 <strong>Update</strong>: ${data[0].commit.message}<br />
                 `
-                statLoaded = true
-            });
-            
+                    statLoaded = true
+                });
+
             fetch('https://api.github.com/repos/executebig/quest/deployments') // Call the fetch function passing the url of the API as a parameter
-            .then(d => d.json())
-            .then(data => {
-                document.getElementById("serverStat").innerHTML += `
+                .then(d => d.json())
+                .then(data => {
+                    document.getElementById("serverStat").innerHTML += `
                 <strong>Deployment</strong>: ${data[0].payload.web_url}<br />
                 <strong>Up Since</strong>: ${new Date(data[0].updated_at).toLocaleString("en-US")}<br />
                 `
-                statLoaded = true
-            });
+                    statLoaded = true
+                });
         }
 
         document.getElementById("serverStat").classList.toggle("hidden")

@@ -3,11 +3,13 @@ const exphbs = require("express-handlebars");
 const mailer = require("./services/mailer");
 const config = require("./config");
 const path = require("path");
-const basicAuth = require("express-basic-auth");
 const fetch = require("node-fetch");
 const bodyParser = require("body-parser");
 const minifyHTML = require("express-minify-html");
 const compression = require("compression");
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const cookieSession = require('cookie-session');
 
 const removeMd = require("remove-markdown");
 const showdown = require("showdown");
@@ -23,6 +25,13 @@ let gitData;
 
 const hbs = exphbs.create({ helpers: helpers, extname: ".hbs" });
 
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: ['randomstringhere']
+}));
+
+app.use(passport.initialize());
+app.use(passport.session()); // Persistent Sessions
 app.use(
   minifyHTML({
     override: true,
@@ -41,6 +50,45 @@ app.use(compression());
 app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Strategy config
+passport.use(new GoogleStrategy({
+  clientID: config.oauth.client,
+  clientSecret: config.oauth.secret,
+  callbackURL: config.host + '/auth/callback'
+},
+(accessToken, refreshToken, profile, done) => {
+  done(null, profile); // passes the profile data to serializeUser
+}
+));
+
+// Used to stuff a piece of information into a cookie
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+// Used to decode the received cookie and persist session
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+// Middleware to check if the user is authenticated
+const isUserAuthenticated = (req, res, next) => {
+  if (req.user) {
+    if (req.user._json.hd == "executebig.org") {
+      req.userData = {
+        name: req.user._json.name,
+        email: req.user._json.email,
+        picture: req.user._json.picture
+      }
+      next();
+    } else {
+      res.redirect("/denied")
+    }
+  } else {
+    res.redirect("/auth")
+  }
+}
 
 app.use("/static", express.static(path.join(__dirname, "static")));
 
@@ -67,6 +115,23 @@ app.post("/", async (req, res) => {
   }
 });
 
+app.get('/auth', passport.authenticate('google', {
+  scope: ['profile', 'email'] // Used to specify the required data
+}));
+
+app.get('/auth/callback', passport.authenticate('google'), (req, res) => {
+  res.redirect('/admin');
+});
+
+app.get("/denied", (req, res) => {
+  res.render("denied", { title: "Access Denied" });
+})
+
+app.get('/auth/logout', (req, res) => {
+  req.logout(); 
+  res.redirect('/');
+});
+
 app.post("/update/:id", async (req, res) => {
   await data.updateRecord(req.params.id, req.body);
 
@@ -77,18 +142,18 @@ app.post("/update/:id", async (req, res) => {
 const adminRouter = express.Router();
 app.use("/admin", adminRouter);
 
-adminRouter.use(basicAuth({ users: { [config.login.user]: config.login.password }, challenge: true }));
+adminRouter.use(isUserAuthenticated);
 
 adminRouter.get("/", (req, res) => {
   submissions = data.loadSubmissions();
   let submissionsPromise = Promise.resolve(submissions);
   submissionsPromise.then((d) => {
-    res.render("dashboard", { title: "Dashboard", layout: "admin", data: d, n: d.length });
+    res.render("dashboard", { title: "Dashboard", layout: "admin", data: d, n: d.length, userData: req.userData });
   });
 });
 
 adminRouter.get("/email", (req, res) => {
-  res.render("email", { title: "Auto Email", layout: "admin" });
+  res.render("email", { title: "Auto Email", layout: "admin", userData: req.userData });
 });
 
 adminRouter.post("/email", (req, res) => {
@@ -128,7 +193,7 @@ adminRouter.get("/submission/:id", (req, res) => {
   let submissionPromise = Promise.resolve(submission);
   submissionPromise.then((d) => {
     console.log(d);
-    res.render("submission", { title: `Submission #${d[0]["Autonumber"]}`, layout: "admin", data: d[0], noTabs: true });
+    res.render("submission", { title: `Submission #${d[0]["Autonumber"]}`, layout: "admin", data: d[0], noTabs: true, userData: req.userData });
   });
 });
 // console.log(mailer.send("hi@mingjie.dev", "This is a test message", "<h1>Test HTML content</h1><strong>Bold Content</strong>", "Test text content. Not bold content"))
