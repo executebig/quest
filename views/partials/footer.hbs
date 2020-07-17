@@ -27,7 +27,7 @@
                 .then(data => {
                     document.getElementById("serverStat").innerHTML += `
                 <strong>Last Update</strong>: ${new Date(data[0].commit.committer.date).toLocaleString("en-US")}<br />
-                <strong>Git Commit</strong>: <a href="${data[0].html_url}" target="blank">${data[0].sha}</a> by <a href="${data[0].committer.html_url}" target="blank">@${data[0].author.login}</a><br />
+                <strong>Git Commit</strong>: <a href="${data[0].html_url}" target="blank">${data[0].sha.substring(0, 7)}</a> by <a href="${data[0].committer.html_url}" target="blank">@${data[0].author.login}</a><br />
                 <strong>Update</strong>: ${data[0].commit.message}<br />
                 `
                     statLoaded = true
