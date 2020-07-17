@@ -16,8 +16,11 @@ const convertMd = new showdown.Converter();
 const app = express();
 const helpers = require("./lib/helpers");
 const data = require("./services/data");
+const info = require("./services/info");
 const { json } = require("express");
 const { Converter } = require("showdown");
+
+let gitData;
 
 const hbs = exphbs.create({ helpers: helpers, extname: ".hbs" });
 
@@ -64,6 +67,12 @@ app.post("/", async (req, res) => {
     res.render("collection", { title: "Error", email: email });
   }
 });
+
+// Send statistics
+app.get("/stat", async (req, res) => {
+  gitData = gitData || await info.loadGitInfo()
+  res.json(gitData)
+})
 
 app.post("/update/:id", async (req, res) => {
   await data.updateRecord(req.params.id, req.body);

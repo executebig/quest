@@ -1,0 +1,27 @@
+<br />
+
+<a id="copyright">&copy;2020 Execute Big</a>
+<p id="serverStat" class="hidden"></p>
+
+{{#extend "foot-inject"}}
+<script>
+    let statLoaded = false;
+
+    document.getElementById("copyright").addEventListener("click", () => {
+        if (!statLoaded) {
+            fetch('/stat') // Call the fetch function passing the url of the API as a parameter
+            .then(d => d.json())
+            .then(data => {
+                document.getElementById("serverStat").innerHTML = `
+                <strong>Branch</strong>: ${data.branch}<br />
+                <strong>Last Update</strong>: ${new Date(data.committedOn * 1000).toLocaleString("en-US")}<br />
+                <strong>Git Commit</strong>: <a href="https://github.com/executebig/quest/commit/${data.hash}" target="blank">${data.shortHash}</a> by ${data.author.name}<br />
+                <strong>Update</strong>: ${data.subject}
+                `
+            });
+        }
+
+        document.getElementById("serverStat").classList.toggle("hidden")
+    })
+</script>
+{{/extend}}

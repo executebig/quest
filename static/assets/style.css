@@ -3,6 +3,7 @@
 html, body, button, input, select, textarea {
   font-family: "Inter", sans-serif!important;
 }
+
 @supports (font-variation-settings: normal) {
   html, body, button, input, select, textarea {
     font-family: "Inter var", sans-serif!important;
@@ -11,18 +12,18 @@ html, body, button, input, select, textarea {
 
 
 span.is-branding {
-    color: #266dd3;
-    font-weight: 800;
+  color: #266dd3;
+  font-weight: 800;
 }
 
 img.is-logo {
-    margin: 0 20px;
-    padding: 0 5px;
+  margin: 0 20px;
+  padding: 0 5px;
 }
 
 a.is-disabled {
-    color: gray;
-    cursor: not-allowed;
+  color: gray;
+  cursor: not-allowed;
 }
 
 .container.main {
@@ -74,4 +75,28 @@ a.is-disabled {
   content: '*';
   color: #e42d40;
   margin-left: 2px;
+}
+
+.hidden {
+  display: none
+}
+
+#copyright {
+  font-size: 14px;
+  font-weight: 800;
+  color: #4a4a4a!important;
+  cursor: default;
+  
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */     
+}
+
+#copyright:focus {
+  outline: -webkit-focus-ring-color auto 1px;
+}
+
+#serverStat {
+  font-size: 14px;
 }
