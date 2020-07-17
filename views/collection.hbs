@@ -19,6 +19,7 @@
 <h2 class="subtitle">{{formatDate data.Start "ha MMMM DD, YYYY"}} &ndash; {{formatDate data.End "ha MMMM DD, YYYY"}}
 </h2>
 
+<p>Not submitting for {{lookup data "Event Name"}}? <a href="/"><strong>Log Out »</strong></a></p>
 <hr />
 
 <form method="POST" action="/update/{{data.id}}" id="update">
