@@ -9,15 +9,25 @@
 
     document.getElementById("copyright").addEventListener("click", () => {
         if (!statLoaded) {
-            fetch('/stat') // Call the fetch function passing the url of the API as a parameter
+            fetch('https://api.github.com/repos/executebig/quest/commits') // Call the fetch function passing the url of the API as a parameter
             .then(d => d.json())
             .then(data => {
-                document.getElementById("serverStat").innerHTML = `
-                <strong>Branch</strong>: ${data.branch}<br />
-                <strong>Last Update</strong>: ${new Date(data.committedOn * 1000).toLocaleString("en-US")}<br />
-                <strong>Git Commit</strong>: <a href="https://github.com/executebig/quest/commit/${data.hash}" target="blank">${data.shortHash}</a> by ${data.author.name}<br />
-                <strong>Update</strong>: ${data.subject}
+                document.getElementById("serverStat").innerHTML += `
+                <strong>Last Update</strong>: ${new Date(data[0].commit.committer.date).toLocaleString("en-US")}<br />
+                <strong>Git Commit</strong>: <a href="${data[0].html_url}" target="blank">${data[0].sha}</a> by <a href="${data[0].committer.html_url}" target="blank">@${data[0].author.login}</a><br />
+                <strong>Update</strong>: ${data[0].commit.message}<br />
                 `
+                statLoaded = true
+            });
+            
+            fetch('https://api.github.com/repos/executebig/quest/deployments') // Call the fetch function passing the url of the API as a parameter
+            .then(d => d.json())
+            .then(data => {
+                document.getElementById("serverStat").innerHTML += `
+                <strong>Deployment</strong>: ${data[0].payload.web_url}<br />
+                <strong>Up Since</strong>: ${new Date(data[0].updated_at).toLocaleString("en-US")}<br />
+                `
+                statLoaded = true
             });
         }
 
