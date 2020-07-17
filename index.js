@@ -126,6 +126,8 @@ app.post('/', async (req, res) => {
 app.get(
   '/auth',
   passport.authenticate('google', {
+    hd: 'executebig.org',
+    prompt: 'select_account',
     scope: ['profile', 'email'] // Used to specify the required data
   })
 )
