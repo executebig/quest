@@ -27,7 +27,7 @@ const hbs = exphbs.create({ helpers: helpers, extname: ".hbs" });
 
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000,
-  keys: ['randomstringhere']
+  keys: [config.sessionKey]
 }));
 
 app.use(passport.initialize());
