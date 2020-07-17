@@ -1,11 +1,9 @@
 <div class="field">
   <label class="label{{#if required}} required{{/if}}">{{label}}</label>
   <div class="control{{#if icon}} has-icons-left{{/if}}">
-    <input class="input" type="{{type}}" placeholder="{{placeholder}}" name="{{name}}"
-    {{#if min}} min={{min}}{{/if}}
-    {{#if max}} max={{max}}{{/if}}
-    {{#if required}} required{{/if}}>
-    
+    <input class="input" type="{{type}}" placeholder="{{placeholder}}" name="{{name}}" {{#if min}} min={{min}}{{/if}}
+      {{#if max}} max={{max}}{{/if}} {{#if required}} required{{/if}}>
+
     {{#if icon}}
     <span class="icon is-small is-left">
       <i class="fas fa-{{icon}}"></i>

@@ -1,7 +1,7 @@
-const config = require("../config");
-const sgMail = require("@sendgrid/mail");
+const config = require('../config')
+const sgMail = require('@sendgrid/mail')
 
-sgMail.setApiKey(config.mail.api_key);
+sgMail.setApiKey(config.mail.api_key)
 
 exports.send = (from, to, subject, html, text) => {
   return new Promise((resolve, reject) => {
@@ -11,15 +11,15 @@ exports.send = (from, to, subject, html, text) => {
         to: to,
         subject: subject,
         html: html,
-        text: text,
+        text: text
       },
       (err, info) => {
         if (err) {
-          reject(err);
+          reject(err)
         } else {
-          resolve(info);
+          resolve(info)
         }
       }
-    );
-  });
-};
+    )
+  })
+}

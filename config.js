@@ -1,9 +1,9 @@
-require("dotenv").config();
+require('dotenv').config()
 
 // Could use nconf, but a bit overkill
 module.exports = {
   port: process.env.PORT || 3000,
-  host: process.env.HOST || "http://localhost:3000",
+  host: process.env.HOST || 'http://localhost:3000',
   sessionKey: process.env.SESSION_KEY,
   oauth: {
     client: process.env.OAUTH_CLIENT,
@@ -15,5 +15,5 @@ module.exports = {
   },
   mail: {
     api_key: process.env.SENDGRID_KEY
-  },
-};
+  }
+}

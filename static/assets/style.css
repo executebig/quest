@@ -1,12 +1,22 @@
-@import url("https://rsms.me/inter/inter.css");
+@import url('https://rsms.me/inter/inter.css');
 
-html, body, button, input, select, textarea {
-  font-family: "Inter", sans-serif!important;
+html,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Inter', sans-serif !important;
 }
 
 @supports (font-variation-settings: normal) {
-  html, body, button, input, select, textarea {
-    font-family: "Inter var", sans-serif!important;
+  html,
+  body,
+  button,
+  input,
+  select,
+  textarea {
+    font-family: 'Inter var', sans-serif !important;
   }
 }
 
@@ -45,7 +55,7 @@ a.is-disabled {
 
 .panel-heading .hint {
   font-size: 70%;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .panel-heading .live-dot {
@@ -60,7 +70,7 @@ a.is-disabled {
   }
 
   50% {
-    opacity: .2;
+    opacity: 0.2;
   }
 
   100% {
@@ -69,7 +79,7 @@ a.is-disabled {
 }
 
 .button {
-  border-radius: 5px!important;
+  border-radius: 5px !important;
 }
 
 .hero.is-brand {
@@ -91,19 +101,19 @@ a.is-disabled {
 }
 
 .hidden {
-  display: none
+  display: none;
 }
 
 #copyright {
   font-size: 14px;
   font-weight: 800;
-  color: #4a4a4a!important;
+  color: #4a4a4a !important;
   cursor: default;
-  
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */     
+
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Likely future */
 }
 
 #copyright:focus {

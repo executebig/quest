@@ -3,11 +3,12 @@
 <div class="footer">
     <div class="content container">
         {{#if userData}}
-        <p class="is-pulled-right has-text-right" style="font-size: 14px;"><strong
-                style="color: red;">***CONFIDENTIAL AREA***</strong><br />Access: <strong>{{userData.name}}</strong>. <a
-                href="/auth/logout">Log Out »</a><br /><span class="is-hint">{{userData.email}}</span></p>
+        <p class="is-pulled-right has-text-right" style="font-size: 14px;"><strong style="color: red;">***CONFIDENTIAL
+                AREA***</strong><br />Access: <strong>{{userData.name}}</strong>. <a href="/auth/logout">Log Out
+                »</a><br /><span class="is-hint">{{userData.email}}</span></p>
         {{else}}
-        <p class="is-pulled-right has-text-right" style="font-size: 14px;">Admin: <a href="/admin">Log In »</a><br /><span class="is-hint">Use Execute Big account.</span></p>
+        <p class="is-pulled-right has-text-right" style="font-size: 14px;">Admin: <a href="/admin">Log In
+                »</a><br /><span class="is-hint">Use Execute Big account.</span></p>
         {{/if}}
 
         <a id="copyright">&copy;2020 Execute Big</a>
