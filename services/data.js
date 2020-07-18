@@ -92,4 +92,33 @@ const updateRecord = async (rid, d) => {
   })
 }
 
-module.exports = { loadSubmissions, getDataById, getRecByEmail, updateRecord }
+const updateStats = async (rid, d) => {
+  return new Promise((resolve, reject) => {
+    base('Submissions').update(
+      rid,
+      {
+        Registered: d.registered,
+        Attended: d.attended,
+        GenderURM: d.genderURM,
+        RacialURM: d.racialURM
+      },
+      { typecast: true },
+      function (err, record) {
+        if (err) {
+          reject(err)
+          console.log(err)
+        }
+
+        resolve()
+      }
+    )
+  })
+}
+
+module.exports = {
+  loadSubmissions,
+  getDataById,
+  getRecByEmail,
+  updateRecord,
+  updateStats
+}

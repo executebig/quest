@@ -8,6 +8,10 @@
       class="tag is-dark">{{formatDate Start "MMMM YYYY"}}</span>&ensp;<span
       class="tag is-warning">{{#if Online}}Online{{else}}{{"Event Location"}}{{/if}}</span>
 
+    {{#if Registered}}&ensp;
+    <span class="tag is-success">{{percentage Attended Registered}} Attendance</span>
+    {{/if}}
+
     {{#if Complete}}
     &ensp;<span class="tag is-info">{{Scope}}</span>
     {{/if}}

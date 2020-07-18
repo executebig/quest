@@ -227,7 +227,12 @@ adminRouter.get('/submission/:id', (req, res) => {
     })
   })
 })
-// console.log(mailer.send("hi@mingjie.dev", "This is a test message", "<h1>Test HTML content</h1><strong>Bold Content</strong>", "Test text content. Not bold content"))
+
+adminRouter.post('/update/:id', async (req, res) => {
+  await data.updateStats(req.params.id, req.body)
+
+  res.redirect('/admin')
+})
 
 app.listen(config.port, () => console.log(`Quest listening at ${config.host}`))
 

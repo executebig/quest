@@ -127,27 +127,27 @@
         <h1 class="title is-3">Statistics (Unfinished)</h1>
         <p class="subtitle is-6">Staff instructions: Please interpret data from the data sheet and enter the key metrics
             here.</p>
-        <form>
+        <form action="/admin/update/{{id}}" method="POST">
             <table class="table is-fullwidth is-hoverable">
                 <tbody>
                     <tr>
                         <td>Registered</td>
-                        <td><input class="input is-small" type="number" value="{{Autonumber}}"></td>
+                        <td><input class="input is-small" type="number" value="{{Registered}}" name="registered"></td>
                     </tr>
 
                     <tr>
                         <td>Attended</td>
-                        <td><input class="input is-small" type="number" value="{{Autonumber}}"></td>
+                        <td><input class="input is-small" type="number" value="{{Attended}}" name="attended"></td>
                     </tr>
 
                     <tr>
                         <td>Gender URM</td>
-                        <td><input class="input is-small" type="number" value="{{Autonumber}}"></td>
+                        <td><input class="input is-small" type="number" value="{{GenderURM}}" name="genderURM"></td>
                     </tr>
 
                     <tr>
                         <td>Racial URM</td>
-                        <td><input class="input is-small" type="number" value="{{Autonumber}}"></td>
+                        <td><input class="input is-small" type="number" value="{{RacialURM}}" name="racialURM"></td>
                     </tr>
 
                     <tr>
@@ -155,7 +155,7 @@
 
                         </td>
                         <td>
-                            <button class="button is-small is-link is-fullwidth">Update</button>
+                            <button class="button is-small is-link is-fullwidth" type="submit">Update</button>
                         </td>
 
                     </tr>
