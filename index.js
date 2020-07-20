@@ -10,6 +10,8 @@ const compression = require('compression')
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const cookieSession = require('cookie-session')
+const Bugsnag = require('@bugsnag/js')
+const BugsnagPluginExpress = require('@bugsnag/plugin-express')
 
 const removeMd = require('remove-markdown')
 const showdown = require('showdown')
@@ -21,9 +23,14 @@ const data = require('./services/data')
 const { json } = require('express')
 const { Converter } = require('showdown')
 
-let gitData
-
 const hbs = exphbs.create({ helpers: helpers, extname: '.hbs' })
+
+Bugsnag.start({
+  apiKey: config.bugsnagKey,
+  plugins: [BugsnagPluginExpress]
+})
+
+const bugsnag = Bugsnag.getPlugin('express')
 
 app.use(
   cookieSession({
@@ -31,7 +38,8 @@ app.use(
     keys: [config.sessionKey]
   })
 )
-
+app.use(bugsnag.requestHandler)
+app.use(bugsnag.errorHandler)
 app.use(passport.initialize())
 app.use(passport.session()) // Persistent Sessions
 app.use(
