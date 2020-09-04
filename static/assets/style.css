@@ -116,9 +116,8 @@ a.is-disabled {
 }
 
 #copyright {
-  font-size: 24px;
   font-weight: 800;
-  color: #266dd3 !important;
+  color: #fff!important;
   font-family: 'Nunito', Helvetica, Arial, sans-serif, -apple-system;
   cursor: default;
 
@@ -137,11 +136,22 @@ a.is-disabled {
 }
 
 .footer {
-  padding-bottom: 3em;
+  margin-top: 2rem;
+  padding: 2rem 1.5rem 1.5rem;
+  background-color: #266dd3;
+  color: #fff;
 }
 
 .is-hint {
   color: lightslategrey;
+}
+
+.footer .is-hint {
+  color: lightgray;
+}
+
+.footer a, .footer strong {
+  color: #fff
 }
 
 .message-header, .panel-heading {
