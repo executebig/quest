@@ -9,12 +9,19 @@
     <link rel="stylesheet" href="/static/assets/style.css" />
     <link rel="icon" type="image/png" href="/static/assets/icon.png" />
 
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap" media="print" onload="this.media='all'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap" /></noscript>
+
     {{{block 'head-inject'}}}
 </head>
 
 <body>
     <div class="Site-Content">
-        <section class="hero is-dark is-brand">
+        <section class="hero is-medium">
+            <img src="https://executebig.org/images/brand/steak-blue.svg">
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title"><span class="is-branding">Execute Big</span> Quest &ndash; {{title}}</h1>
