@@ -5,11 +5,14 @@ input,
 select,
 textarea {
   font-family: 'Inter', sans-serif !important;
+  color: #2F2F41;
 }
 
-h1, h2, h3, h4, h5, .subtitle {
+h1, h2, h3, h4, h5, .subtitle, .title {
   font-family: 'Nunito', Helvetica, Arial, sans-serif, -apple-system;
   font-weight: 900;
+  color: #2F2F41;
+  line-height: 1.25;
 }
 
 body {
@@ -35,6 +38,10 @@ body {
   top: -12.5%;
 }
 
+.hero .hero-body {
+  padding: 4rem 1.5rem
+}
+
 span.is-branding {
   color: #266dd3;
   font-weight: 800;
@@ -50,10 +57,6 @@ a.is-disabled {
   cursor: not-allowed;
 }
 
-.container.main {
-  margin: 2rem auto;
-}
-
 .panel-heading .hint {
   font-size: 70%;
   opacity: 0.6;
@@ -61,7 +64,7 @@ a.is-disabled {
 
 .panel-heading .live-dot {
   margin: 10px;
-  color: #e42d42;
+  color: #DD6E42;
   animation: pulse 2s infinite;
 }
 
@@ -99,11 +102,12 @@ a.is-disabled {
 
 .label {
   font-family: 'Nunito', Helvetica, Arial, sans-serif, -apple-system!important;
+  font-size: 18px;
 }
 
 .label.required::after {
   content: '*';
-  color: #e42d40;
+  color: #DD6E42;
   margin-left: 2px;
 }
 
@@ -140,7 +144,11 @@ a.is-disabled {
   color: lightslategrey;
 }
 
-.message-header {
+.message-header, .panel-heading {
   font-family: 'Nunito', Helvetica, Arial, sans-serif, -apple-system!important;
   font-size: 18px;
+}
+
+.panel  {
+  margin-top: 1rem;
 }

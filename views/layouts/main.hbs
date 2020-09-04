@@ -21,17 +21,19 @@
 <body>
     <div class="Site-Content">
         <section class="hero is-medium">
-            <img src="https://executebig.org/images/brand/steak-blue.svg">
+            <img src="/static/assets/steak-blue.svg">
             <div class="hero-body">
                 <div class="container">
-                    <h1 class="title"><span class="is-branding">Execute Big</span> Quest &ndash; {{title}}</h1>
+                    <h1 class="title is-size-1 is-size-3-mobile"><span class="is-branding">Research: {{title}}</span></h1>
                 </div>
             </div>
         </section>
 
-        <div class="container main">
-            {{{body}}}
-        </div>
+        <section class="section">
+            <div class="container main">
+                {{{body}}}
+            </div>
+        </section>
     </div>
 
     {{>footer}}

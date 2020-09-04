@@ -106,7 +106,7 @@ const isUserAuthenticated = (req, res, next) => {
 app.use('/static', express.static(path.join(__dirname, 'static')))
 
 app.get('/', (req, res) => {
-  res.render('landing', { title: 'Collection' })
+  res.render('landing', { title: 'Data Collection' })
 })
 
 app.post('/', async (req, res) => {
