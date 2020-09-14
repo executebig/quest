@@ -9,10 +9,10 @@
   dependencies:
     "@bugsnag/core" "^7.3.4"
 
-"@bugsnag/core@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@bugsnag/core/-/core-7.2.0.tgz#e2fa741fa2b6da210b5e6f27717103477df32de1"
-  integrity sha512-v1XpF5TVQYrwKpveL8cb1dBSA0DniGzI5we2ICJNmWhylLgzRKZuAs1HUxYB+5+beU51YNrEp8yQy/WKC6HiMg==
+"@bugsnag/core@^7.2.0", "@bugsnag/core@^7.3.0":
+  version "7.3.4"
+  resolved "https://registry.yarnpkg.com/@bugsnag/core/-/core-7.3.4.tgz#616aafe0e4f95c0c2f7edd2ac70be5415f5278ee"
+  integrity sha512-eEm4oMw77oOvBf8lHEhWbMYrQJPc9CncVrnVmgZoWYBMeQQQ9sTMKBPEmaO1RJwyWUv/TQc5bPCpDGlGarA3qg==
   dependencies:
     "@bugsnag/cuid" "^3.0.0"
     "@bugsnag/safe-json-stringify" "^6.0.0"
@@ -56,12 +56,12 @@
     pump "^3.0.0"
     stack-generator "^2.0.3"
 
-"@bugsnag/plugin-express@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@bugsnag/plugin-express/-/plugin-express-7.2.0.tgz#77477d0c197aa52e1b4795fae115b20992aa32fc"
-  integrity sha512-dgRuWFqhzxopPqqHR5SuWuKDdNjE/x2aNee2x+VFSS6wkKysM5oxpI/s7Uuzw0t2np2UbVQKJl4idxwESLCZgw==
+"@bugsnag/plugin-express@^7.3.0":
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/@bugsnag/plugin-express/-/plugin-express-7.3.0.tgz#d883db5bfa8d03e3dd5a45b7d6db5735cd595e7d"
+  integrity sha512-/K7Y0RiUl439fQ2se/fQkQt4RKQUDCUEBC3uxRYfyaYfxXpLEMEorjYEUw4gfvN3ZYyGAzeqX4Frm2Fv6SPMfQ==
   dependencies:
-    "@bugsnag/core" "^7.2.0"
+    "@bugsnag/core" "^7.3.0"
     iserror "^0.0.2"
 
 "@bugsnag/safe-json-stringify@^6.0.0":
