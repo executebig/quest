@@ -7,7 +7,7 @@
   "dependencies": {
     "@bugsnag/js": "^7.3.5",
     "@bugsnag/plugin-express": "^7.3.0",
-    "@sendgrid/mail": "^7.2.5",
+    "@sendgrid/mail": "^7.2.6",
     "airtable": "^0.10.0",
     "compression": "^1.7.4",
     "cookie-session": "^1.4.0",
