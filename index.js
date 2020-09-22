@@ -170,7 +170,7 @@ adminRouter.get('/', (req, res) => {
   let submissionsPromise = Promise.resolve(submissions)
   submissionsPromise.then((d) => {
     res.render('dashboard', {
-      title: 'Dashboard',
+      title: 'Research Dashboard',
       layout: 'admin',
       data: d,
       n: d.length,
