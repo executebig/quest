@@ -112,7 +112,7 @@ app.get('/', (req, res) => {
 app.post('/', async (req, res) => {
   let email = req.body ? req.body.email : ''
 
-  if (addrCheck(email)) {
+  if (addrCheck(email)[0]) {
     let record
 
     record = await data.getRecByEmail(email)
