@@ -112,7 +112,7 @@ app.get('/', (req, res) => {
 app.post('/', async (req, res) => {
   let email = req.body ? req.body.email : ''
 
-  if (addrCheck(email)[0]) {
+  if (addrCheck(email)) {
     let record
 
     record = await data.getRecByEmail(email)
@@ -205,9 +205,7 @@ adminRouter.post('/email', (req, res) => {
     plaintext
   })
 
-  const checkResult = addrCheck(to)
-
-  if (checkResult[0]) {
+  if (addrCheck(to)) {
     mailer
       .send(from, to, subject, html, plaintext)
       .then((d) => {
@@ -244,10 +242,8 @@ adminRouter.post('/update/:id', async (req, res) => {
 
 app.listen(config.port, () => console.log(`Quest listening at ${config.host}`))
 
-let addrCheck = (to) => {
-  for (let i in to) {
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to[i])) return [false, to[i]]
-  }
+let addrCheck = (addr) => {
+  const rule = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-  return [true]
+  return rule.test(String(addr).toLowerCase())
 }
