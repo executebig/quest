@@ -36,7 +36,7 @@ const loadPublicData = async () => {
   await base('Submissions')
     .select({
       view: 'Grid view',
-      filterByFormula: `{Complete} = 1`
+      filterByFormula: `{ShowLogo} = 1`
     })
     .all()
     .then((records) => {
