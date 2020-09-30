@@ -43,11 +43,13 @@ const loadPublicData = async () => {
       for (const i in records) {
         const r = records[i]._rawJson.fields
         
-        publicList.push({
-          name: r['Event Name'],
-          website: r['Website'],
-          logo: r['Logo'] ? r['Logo'][0]['url'] : null
-        })
+        if (r['Logo']) {
+          publicList.push({
+            name: r['Event Name'],
+            website: r['Website'],
+            logo: r['Logo'] ? r['Logo'][0]['url'] : null
+          })
+        }
       }
     })
     .catch(function (e) {
