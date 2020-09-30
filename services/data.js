@@ -30,6 +30,33 @@ const loadSubmissions = async () => {
   return recList
 }
 
+const loadPublicData = async () => {
+  const publicList = []
+
+  await base('Submissions')
+    .select({
+      view: 'Grid view',
+      filterByFormula: `{Complete} = 1`
+    })
+    .all()
+    .then((records) => {
+      for (const i in records) {
+        const r = records[i]._rawJson.fields
+        
+        publicList.push({
+          name: r['Event Name'],
+          website: r['Website'],
+          logo: r['Logo'] ? r['Logo'][0]['url'] : null
+        })
+      }
+    })
+    .catch(function (e) {
+      console.log('Promise Rejected' + e)
+    })
+
+  return publicList
+}
+
 const getDataById = async (rid) => {
   const data = []
 
@@ -117,6 +144,7 @@ const updateStats = async (rid, d) => {
 
 module.exports = {
   loadSubmissions,
+  loadPublicData,
   getDataById,
   getRecByEmail,
   updateRecord,
