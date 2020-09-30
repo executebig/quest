@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 const minifyHTML = require('express-minify-html')
 const compression = require('compression')
 const passport = require('passport')
+const cors = require('cors')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const cookieSession = require('cookie-session')
 const Bugsnag = require('@bugsnag/js')
@@ -42,6 +43,7 @@ app.use(bugsnag.requestHandler)
 app.use(bugsnag.errorHandler)
 app.use(passport.initialize())
 app.use(passport.session()) // Persistent Sessions
+app.use(cors())
 app.use(
   minifyHTML({
     override: true,
@@ -102,6 +104,12 @@ const isUserAuthenticated = (req, res, next) => {
     res.redirect('/auth')
   }
 }
+
+app.get('/api/public', async (req, res) => {
+  const d = await data.loadPublicData()
+
+  res.json(d)
+})
 
 app.use('/static', express.static(path.join(__dirname, 'static')))
 
