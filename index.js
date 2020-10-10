@@ -9,6 +9,7 @@ const minifyHTML = require('express-minify-html')
 const compression = require('compression')
 const passport = require('passport')
 const cors = require('cors')
+const sassMiddleware = require('node-sass-middleware')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const cookieSession = require('cookie-session')
 const Bugsnag = require('@bugsnag/js')
@@ -62,6 +63,14 @@ app.use(compression())
 app.engine('.hbs', hbs.engine)
 app.set('view engine', '.hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(
+  sassMiddleware({
+    src: path.join(__dirname, './styles'),
+    dest: path.join(__dirname, './static/assets/css'),
+    outputStyle: 'compressed',
+    prefix: '/static/assets/css/'
+  })
+)
 
 // Strategy config
 passport.use(
