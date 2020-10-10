@@ -123,10 +123,10 @@ a.is-disabled {
 #serverStat {
   font-size: 14px;
 }
-.footer {
+.footer.branded {
   margin-top: 2rem;
   padding: 2rem 1.5rem 1.5rem;
-  background-color: #266dd3;
+  background-color: $primary;
   color: #fff;
   .is-hint {
     color: lightgray;
