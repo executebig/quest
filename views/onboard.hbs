@@ -1,9 +1,56 @@
-{{#extend "hero-inject"}}
-<img class="mb-5" src="/static/assets/heart.svg" style="width: 8rem;">
-<h1 class="title is-size-2 is-size-3-mobile mb-4">
-   Welcome to Execute Big Research, {{../eventName}}!</h1>
-<p class="mt-1" style="line-height: 2; font-size: 1.2rem">
-   A confirmation email has been sent to your inbox at <strong>{{../email}}</strong>. 
-   But don't worry about that yet — we're going to ask a few
-   simple questions about your event to determine the next steps.</p>
+{{#extend 'hero'}}
+<img class="mb-5" src="/static/assets/heart.svg" style="width: 8rem;" />
+<h1 class="title is-brand is-size-2 is-size-3-mobile">
+  Welcome to Execute Big Research,
+  {{../eventName~}}!
+</h1>
 {{/extend}}
+<p>
+  Thanks for joining us! A confirmation email has been sent to your inbox at
+  <strong>
+    {{email~}}
+  </strong>
+  &mdash;
+   but don't worry about that yet — we're going to ask a few
+   simple questions about your event to determine the next steps.
+</p>
+
+<p>
+  If at any time, you want to send this form to a co-organizer to fill out, you can use the following link and they will be directly brought here.
+</p>
+
+{{>question/input label="Click to Copy" value=returnLink readonly=true clickToCopy=true}}
+
+<form>
+
+{{>question/input label="Your Email Address" value=email disabled=true required=true help="If you need to change your email address, please head back to the homepage and re-register."}}
+
+{{>question/input name="event" label="Event Name" value=eventName required=true}}
+
+{{>question/input name="name" label="Your Name" placeholder="Jane McFly" required=true }}
+
+{{>question/input name="date" type="date" label="Date of Event (or Close Estimate)" required=true help="We will use this information to determine your next steps."}}
+
+<div class="divider is-horizontal">OPTIONAL QUESTIONS</div>
+
+{{#json '[
+  {"value": true, "option": "Virtually (Online)"}, 
+  {"value": false, "option": "In-Person (Offline)"}
+]'}}
+{{>question/radio label="How are you planning to host your event?"
+    name="virtual" option=this}}
+{{/json}}
+
+</form>
+
+{{#extend "sidebar"}}
+
+{{/extend}}
+
+<!-- Prevent User from Accidentally Closing -->
+<script>
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  e.returnValue = '';
+});
+</script>

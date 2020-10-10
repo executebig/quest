@@ -9,6 +9,29 @@ const base = new airtable({ apiKey: config.airtable.key }).base(
   config.airtable.base
 )
 
+const onboard = async (eventName, email) => {
+  return new Promise((resolve, reject) => {
+    base('Submissions').create(
+      [
+        {
+          fields: {
+            'Event Name': eventName,
+            'Contact Email': email
+          }
+        }
+      ],
+      function (err, records) {
+        if (err) {
+          console.log(err)
+          reject(err)
+        }
+
+        resolve(records[0].getId())
+      }
+    )
+  })
+}
+
 // Promise to convert Airtable data into json stream
 const loadSubmissions = async () => {
   const recList = []
@@ -145,6 +168,7 @@ const updateStats = async (rid, d) => {
 }
 
 module.exports = {
+  onboard,
   loadSubmissions,
   loadPublicData,
   getDataById,

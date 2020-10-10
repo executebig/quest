@@ -5,6 +5,7 @@ module.exports = {
   port: process.env.PORT || 3000,
   host: process.env.HOST || 'http://localhost:3000',
   sessionKey: process.env.SESSION_KEY,
+  encryptionKey: process.env.ENCRYPTION_KEY,
   oauth: {
     client: process.env.OAUTH_CLIENT,
     secret: process.env.OAUTH_SECRET

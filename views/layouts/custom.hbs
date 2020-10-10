@@ -7,43 +7,49 @@
     <title>{{title}} &ndash; Execute Big Research</title>
     <link rel="stylesheet" href="/static/assets/css/style.css" />
     <link rel="icon" type="image/png" href="/static/assets/icon.png" />
-
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap" media="print" onload="this.media='all'" />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap" /></noscript>
-
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap"
+        media="print" onload="this.media='all'" />
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap" />
+        </noscript>
     {{{block 'head-inject'}}}
 </head>
 
 <body>
+    {{#unless nonav}}
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    <img src="/static/assets/logo-blue.svg" alt="Execute Big">
+                </a>
+            </div>
+        </nav>
+    {{/unless}}
     <div class="Site-Content">
-        <section class="hero is-medium">
-            <img class="hero-pig" src="/static/assets/steak-blue.svg">
-            <div class="hero-body">
-                <div class="container">
-                    <div class="columns">
-                        <div class="column is-8">
-                            {{{block 'hero-inject'}}}
-                        </div>
+        <section class="section">
+            <div class="container main mt-6">
+                {{{block 'hero'}}}
+                <div class="columns is-variable is-7">
+                    <div class="column is-7-desktop is-full">
+                        {{{body}}}
+                    </div>
+                    <div class="column">
+                        {{{block 'sidebar'}}}
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="section">
-            <div class="container main">
-                {{{body}}}
-            </div>
-        </section>
     </div>
-
     {{>footer}}
-
     <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" type="text/javascript" defer></script>
-    <script async defer data-website-id="4c76e313-5baa-424c-b79e-324fa037683a" src="https://umami.executebig.org/umami.js"></script>
-    
+    <script async defer data-website-id="4c76e313-5baa-424c-b79e-324fa037683a"
+        src="https://umami.executebig.org/umami.js"></script>
     {{{block 'foot-inject'}}}
 </body>
 

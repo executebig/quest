@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars')
 const mailer = require('./services/mailer')
 const config = require('./config')
 const path = require('path')
-const fetch = require('node-fetch')
+const url = require('url')
 const bodyParser = require('body-parser')
 const minifyHTML = require('express-minify-html')
 const compression = require('compression')
@@ -12,8 +12,8 @@ const cors = require('cors')
 const sassMiddleware = require('node-sass-middleware')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const cookieSession = require('cookie-session')
-const Bugsnag = require('@bugsnag/js')
-const BugsnagPluginExpress = require('@bugsnag/plugin-express')
+
+const crypt = require('crypto-js')
 
 const removeMd = require('remove-markdown')
 const showdown = require('showdown')
@@ -22,17 +22,8 @@ const convertMd = new showdown.Converter()
 const app = express()
 const helpers = require('./lib/helpers')
 const data = require('./services/data')
-const { json } = require('express')
-const { Converter } = require('showdown')
 
 const hbs = exphbs.create({ helpers: helpers, extname: '.hbs' })
-
-Bugsnag.start({
-  apiKey: config.bugsnagKey,
-  plugins: [BugsnagPluginExpress]
-})
-
-const bugsnag = Bugsnag.getPlugin('express')
 
 app.use(
   cookieSession({
@@ -40,8 +31,6 @@ app.use(
     keys: [config.sessionKey]
   })
 )
-app.use(bugsnag.requestHandler)
-app.use(bugsnag.errorHandler)
 app.use(passport.initialize())
 app.use(passport.session()) // Persistent Sessions
 app.use(cors())
@@ -114,6 +103,7 @@ const isUserAuthenticated = (req, res, next) => {
   }
 }
 
+// route reserved for static site generation of our website
 app.get('/api/public', async (req, res) => {
   const d = await data.loadPublicData()
 
@@ -123,39 +113,80 @@ app.get('/api/public', async (req, res) => {
 app.use('/static', express.static(path.join(__dirname, 'static')))
 
 app.get('/', (req, res) => {
-  res.render('landing', { title: 'Welcome' })
+  res.render('landing', { title: 'Welcome', nonav: true })
 })
 
-app.get('/onboard', (req, res) => {
-  res.render('onboard', {
-    title: 'Onboarding',
-    layout: 'custom',
-    eventName: req.query.eventName,
-    email: req.query.email
+// service route -- does not render anything
+app.post('/onboard', (req, res) => {
+  data.onboard(req.body.eventName, req.body.email).then((id) => {
+    const accessCode = crypt.Rabbit.encrypt(id, config.encryptionKey).toString()
+
+    console.log(accessCode)
+
+    res.redirect(
+      url.format({
+        pathname: '/onboard',
+        query: {
+          access: accessCode
+        }
+      })
+    )
   })
 })
 
-// app.post('/', async (req, res) => {
-//   let email = req.body ? req.body.email : ''
+// separate page to prevent form resubmission
+app.get('/onboard', (req, res) => {
+  if (req.query.access) {
+    const recordId = crypt.Rabbit.decrypt(
+      req.query.access,
+      config.encryptionKey
+    ).toString(crypt.enc.Utf8)
 
-//   if (addrCheck(email)) {
-//     let record
+    data
+      .getDataById(recordId)
+      .then((data) => {
+        if (data.length == 1) {
+          res.render('onboard', {
+            title: 'Onboarding',
+            layout: 'custom',
+            eventName: data[0]['Event Name'],
+            email: data[0]['Contact Email'],
+            id: recordId,
+            accessCode: req.query.access,
+            returnLink: url.format({
+              pathname: config.host + '/onboard',
+              query: {
+                access: req.query.access
+              }
+            })
+          })
+        } else {
+          res.status(404).render('404')
+        }
+      })
+      .catch((err) => {
+        res.status(404).render('404')
+      })
+  } else {
+    res.status(404).render('404')
+  }
+})
 
-//     record = await data.getRecByEmail(email)
+app.get('/next', async (req, res) => {
+  const recordId = crypt.Rabbit.decrypt(
+    req.query.access,
+    config.encryptionKey
+  ).toString(crypt.enc.Utf8)
 
-//     if (record.length > 0) {
-//       record[0]._rawJson.fields.id = record[0]._rawJson.id
-//       res.render('collection', {
-//         title: 'Continue',
-//         data: record[0]._rawJson.fields
-//       })
-//     } else {
-//       res.render('collection', { title: 'Error', email: email })
-//     }
-//   } else {
-//     res.render('collection', { title: 'Error', email: email })
-//   }
-// })
+  data.getDataById(recordId).then((data) => {
+    console.log(data)
+    res.render('next', {
+      title: 'Continue',
+      layout: 'custom',
+      ...data[0]
+    })
+  })
+})
 
 app.get(
   '/auth',
@@ -177,12 +208,6 @@ app.get('/denied', (req, res) => {
 app.get('/auth/logout', (req, res) => {
   req.logout()
   res.redirect('/')
-})
-
-app.post('/update/:id', async (req, res) => {
-  await data.updateRecord(req.params.id, req.body)
-
-  res.redirect('https://research.executebig.org/thanks.html')
 })
 
 // Protect full site with simple auth

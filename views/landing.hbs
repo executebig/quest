@@ -1,15 +1,20 @@
 <div class="columns">
   <div class="column is-full is-half-desktop">
     <h1 class="title">
-      Past/Upcoming Events
+      Getting Started
     </h1>
-    <form method="GET" action="/onboard">
+    <form method="POST" action="/onboard">
       <div class="field">
         <label class="label">
           Your Event Name
         </label>
         <div class="control">
-          <input class="input" type="text" name="eventName" placeholder="DevHacks 2020" />
+          <input
+            class="input"
+            type="text"
+            name="eventName"
+            placeholder="DevHacks 2020"
+          />
         </div>
       </div>
       <div class="field">
@@ -17,7 +22,12 @@
           Your Email Address
         </label>
         <div class="control">
-          <input class="input" type="email" name="email" placeholder="dev@devhacks.org" />
+          <input
+            class="input"
+            type="email"
+            name="email"
+            placeholder="dev@devhacks.org"
+          />
         </div>
       </div>
       <button class="button is-brand" type="submit">
@@ -32,20 +42,25 @@
     <h1 class="title">
       Continue Submission
     </h1>
-    <form>
+    <form method="GET" action="/next">
       <div class="field">
         <label class="label">
           Event Access Code
         </label>
         <div class="control">
-          <input class="input" type="text" name="name" placeholder="AHGUWNEC2T346ZWHWU2C" />
+          <input
+            class="input"
+            type="text"
+            name="access"
+            placeholder="U2FsdGVkX19fhkuSDklOd2YaESSxfk28vH66UpW5dRiC"
+          />
         </div>
       </div>
       <button class="button is-brand" type="submit">
         Resume
       </button>
       <hr />
-      <p>
+      <p class="help">
         Your event access code was emailed to you after your
         initial submission of your event's basic information. Look for
         an email from
