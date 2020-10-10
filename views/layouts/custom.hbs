@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{title}} &ndash; Execute Big</title>
+    <title>{{title}} &ndash; Execute Big Research</title>
     <link rel="stylesheet" href="/static/assets/css/style.css" />
     <link rel="icon" type="image/png" href="/static/assets/icon.png" />
 
@@ -19,25 +19,31 @@
 
 <body>
     <div class="Site-Content">
-        <section class="section">
-            <div class="container">
-                <h1 class="title"><span class="is-branding">Execute Big</span> &ndash; {{title}}</h1>
-                <p class="subtitle">The centralized toolkit & CRM for the research project.</p>
+        <section class="hero is-medium">
+            <img class="hero-pig" src="/static/assets/steak-blue.svg">
+            <div class="hero-body">
+                <div class="container">
+                    <div class="columns">
+                        <div class="column is-8">
+                            {{{block 'hero-inject'}}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        {{#unless noTabs}}
-        {{> tabs}}
-        {{/unless}}
-
-        <div class="container main">
-            {{{body}}}
-        </div>
+        <section class="section">
+            <div class="container main">
+                {{{body}}}
+            </div>
+        </section>
     </div>
 
     {{>footer}}
 
     <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" type="text/javascript" defer></script>
+    <script async defer data-website-id="4c76e313-5baa-424c-b79e-324fa037683a" src="https://umami.executebig.org/umami.js"></script>
+    
     {{{block 'foot-inject'}}}
 </body>
 

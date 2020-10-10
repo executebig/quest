@@ -123,30 +123,39 @@ app.get('/api/public', async (req, res) => {
 app.use('/static', express.static(path.join(__dirname, 'static')))
 
 app.get('/', (req, res) => {
-  res.render('landing', { title: 'Data Collection' })
+  res.render('landing', { title: 'Welcome' })
 })
 
-app.post('/', async (req, res) => {
-  let email = req.body ? req.body.email : ''
-
-  if (addrCheck(email)) {
-    let record
-
-    record = await data.getRecByEmail(email)
-
-    if (record.length > 0) {
-      record[0]._rawJson.fields.id = record[0]._rawJson.id
-      res.render('collection', {
-        title: 'Continue',
-        data: record[0]._rawJson.fields
-      })
-    } else {
-      res.render('collection', { title: 'Error', email: email })
-    }
-  } else {
-    res.render('collection', { title: 'Error', email: email })
-  }
+app.get('/onboard', (req, res) => {
+  res.render('onboard', {
+    title: 'Onboarding',
+    layout: 'custom',
+    eventName: req.query.eventName,
+    email: req.query.email
+  })
 })
+
+// app.post('/', async (req, res) => {
+//   let email = req.body ? req.body.email : ''
+
+//   if (addrCheck(email)) {
+//     let record
+
+//     record = await data.getRecByEmail(email)
+
+//     if (record.length > 0) {
+//       record[0]._rawJson.fields.id = record[0]._rawJson.id
+//       res.render('collection', {
+//         title: 'Continue',
+//         data: record[0]._rawJson.fields
+//       })
+//     } else {
+//       res.render('collection', { title: 'Error', email: email })
+//     }
+//   } else {
+//     res.render('collection', { title: 'Error', email: email })
+//   }
+// })
 
 app.get(
   '/auth',
