@@ -49,6 +49,10 @@ h5,
 p {
   line-height: 2;
   font-size: 1.2rem;
+
+  &:not(:first-child) {
+    margin-top: 1rem;
+  }
 }
 .Site-Content {
   flex: 1;
@@ -143,7 +147,7 @@ a.is-disabled {
   }
 }
 .field {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 .label {
   font-family: $family-secondary;
@@ -164,10 +168,6 @@ a.is-disabled {
   color: #fff !important;
   font-family: $family-secondary;
   cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   &:focus {
     outline: -webkit-focus-ring-color auto 1px;
   }

@@ -1,0 +1,39 @@
+<img class="mb-5" src="/static/assets/chat.svg" style="width: 8rem;" />
+<h1 class="title is-brand is-size-2 is-size-3-mobile">
+  Schedule a meeting with us!
+</h1>
+<p>
+  We know that you are busy preparing for a successful event, and we would like to help!
+  Schedule a quick 30-minute call with us, and we'll answer any questions that you may have
+  about how to prepare your event for Execute Big Research.
+</p>
+<div class="calendly-inline-widget mt-4" style="min-width:320px;height:750px;" data-auto-load="false">
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+  <script>
+    Calendly.initInlineWidget({
+      url: 'https://calendly.com/megancui/30min?hide_event_type_details=1',
+      prefill: {
+        name: "{{ name }}",
+        email: "{{ email }}",
+        customAnswers: {
+          a1: 1
+        }
+      }
+    });
+
+    function isCalendlyEvent(e) {
+      return e.data.event &&
+        e.data.event.indexOf('calendly') === 0;
+    };
+
+    window.addEventListener(
+      'message',
+      function (e) {
+        if (isCalendlyEvent(e) && e.data.event === "calendly.event_scheduled") {
+          window.location = "/scheduled"
+        }
+      }
+    );
+  </script>
+</div>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>

@@ -5,6 +5,8 @@ const config = require('./config')
 const path = require('path')
 const url = require('url')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 const minifyHTML = require('express-minify-html')
 const compression = require('compression')
 const passport = require('passport')
@@ -12,6 +14,7 @@ const cors = require('cors')
 const sassMiddleware = require('node-sass-middleware')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const cookieSession = require('cookie-session')
+const csrf = require('csurf')
 
 const crypt = require('crypto-js')
 
@@ -25,6 +28,9 @@ const data = require('./services/data')
 
 const hbs = exphbs.create({ helpers: helpers, extname: '.hbs' })
 
+const csrfProtection = csrf({ cookie: true })
+
+app.use(cookieParser())
 app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
@@ -112,12 +118,16 @@ app.get('/api/public', async (req, res) => {
 
 app.use('/static', express.static(path.join(__dirname, 'static')))
 
-app.get('/', (req, res) => {
-  res.render('landing', { title: 'Welcome', nonav: true })
+app.get('/', csrfProtection, (req, res) => {
+  res.render('landing', {
+    title: 'Welcome',
+    nonav: true,
+    csrfToken: req.csrfToken()
+  })
 })
 
 // service route -- does not render anything
-app.post('/onboard', (req, res) => {
+app.post('/onboard', csrfProtection, (req, res) => {
   data.onboard(req.body.eventName, req.body.email).then((id) => {
     const accessCode = crypt.Rabbit.encrypt(id, config.encryptionKey).toString()
 
@@ -186,6 +196,19 @@ app.get('/next', async (req, res) => {
       ...data[0]
     })
   })
+})
+
+app.get('/schedule', (req, res) => {
+  res.render('schedule', {
+    title: 'Schedule Meeting',
+    layout: 'custom',
+    name: req.query.name,
+    email: req.query.email
+  })
+})
+
+app.get('/scheduled', (req, res) => {
+  res.render('scheduled', { title: 'Meeting Scheduled', layout: 'custom' })
 })
 
 app.get(

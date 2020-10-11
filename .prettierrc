@@ -8,7 +8,8 @@
     {
       "files": "*.hbs",
       "options": {
-        "singleQuote": false
+        "singleQuote": false,
+        "proseWrap": "never"
       }
     }
   ]
