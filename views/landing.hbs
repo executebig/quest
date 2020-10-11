@@ -24,6 +24,10 @@
       <button class="button is-brand" type="submit">
         Start Submission
       </button>
+      <p class="help">
+        If you have already started your submission, please <strong>do not start a new submission</strong>! You can regain access to your
+        previous submission from the email that we sent you.
+      </p>
     </form>
   </div>
   <div class="divider is-vertical">
@@ -33,6 +37,13 @@
     <h1 class="title">
       Continue Submission
     </h1>
+    <p>
+      Your access code was emailed to you started your submission. Look for
+      an email from
+      <strong>
+        team@executebig.org
+      </strong>! You can also log in directly with the link in the email.
+    </p>
     <form method="GET" action="/next">
       <input type="hidden" name="_csrf" value="{{csrfToken}}">
       <div class="field">
@@ -41,16 +52,6 @@
         </label>
         <div class="control">
           <input class="input" type="text" name="access" placeholder="U2FsdGVkX19fhkuSDklOd2YaESSxfk28vH66UpW5dRiC" />
-          <p class="help">
-            Your event access code was emailed to you after your
-            initial submission of your event's basic information. Look for
-            an email from
-            <strong>
-              team@executebig.org
-            </strong>
-            – you may
-            also use the link from the email to directly log in.
-          </p>
         </div>
       </div>
       <button class="button is-brand" type="submit">

@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
   submissions = data.loadSubmissions()
   let submissionsPromise = Promise.resolve(submissions)
   submissionsPromise.then((d) => {
-    res.render('dashboard', {
+    res.render('admin/dashboard', {
       title: 'Research Dashboard',
       layout: 'admin',
       data: d,
@@ -21,7 +21,7 @@ app.get('/submission/:id', (req, res) => {
   let submissionPromise = Promise.resolve(submission)
   submissionPromise.then((d) => {
     console.log(d)
-    res.render('submission', {
+    res.render('admin/submission', {
       title: `Submission #${d[0]['Autonumber']}`,
       layout: 'admin',
       data: d[0],

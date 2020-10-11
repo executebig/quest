@@ -66,6 +66,8 @@ p {
     opacity: 0.2;
     height: 125%;
     top: -12.5%;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
   }
   .hero-body {
     padding: 4rem 1.5rem;

@@ -15,9 +15,15 @@
   simple questions about your event to determine the next steps.
 </p>
 <p>
-  If at any time, you want to send this form to a co-organizer to fill out, you can use the following link and they will be directly brought here.
+  We take data privacy very seriously. Please read the <a href="https://executebig.org/research-privacy/" target="_blank">Privacy Promise</a>
+  on our website to learn more about what we are collecting, as well as how we are planning
+  to share these information.
+</p>
+<p>
+  If at any time, you want to send this form to a co-organizer to fill out (or if you accidentally closed this page), you can use the following link and they will be directly brought here.
 </p>
 {{>question/input label="Click to Copy" value=returnLink readonly=true clickToCopy=true}}
+<div class="divider is-horizontal">REQUIRED INFORMATION</div>
 <form action="/update/{{id}}">
   {{>question/input label="Your Email Address" value=email disabled=true required=true help="If you need to change your email address, please head back to the homepage and re-register."}}
   {{>question/input name="event" label="Event Name" value=eventName required=true}}
