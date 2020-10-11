@@ -6,21 +6,15 @@ const path = require('path')
 const url = require('url')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const session = require('express-session')
 const minifyHTML = require('express-minify-html')
 const compression = require('compression')
-const passport = require('passport')
 const cors = require('cors')
 const sassMiddleware = require('node-sass-middleware')
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const cookieSession = require('cookie-session')
 const csrf = require('csurf')
+const passport = require('./services/passport')
 
 const crypt = require('crypto-js')
-
-const removeMd = require('remove-markdown')
-const showdown = require('showdown')
-const convertMd = new showdown.Converter()
 
 const app = express()
 const helpers = require('./lib/helpers')
@@ -67,30 +61,6 @@ app.use(
   })
 )
 
-// Strategy config
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: config.oauth.client,
-      clientSecret: config.oauth.secret,
-      callbackURL: config.host + '/auth/callback'
-    },
-    (accessToken, refreshToken, profile, done) => {
-      done(null, profile) // passes the profile data to serializeUser
-    }
-  )
-)
-
-// Used to stuff a piece of information into a cookie
-passport.serializeUser((user, done) => {
-  done(null, user)
-})
-
-// Used to decode the received cookie and persist session
-passport.deserializeUser((user, done) => {
-  done(null, user)
-})
-
 // Middleware to check if the user is authenticated
 const isUserAuthenticated = (req, res, next) => {
   if (req.user) {
@@ -102,7 +72,7 @@ const isUserAuthenticated = (req, res, next) => {
       }
       next()
     } else {
-      res.redirect('/denied')
+      res.redirect('/auth/denied')
     }
   } else {
     res.redirect('/auth')
@@ -129,9 +99,12 @@ app.get('/', csrfProtection, (req, res) => {
 // service route -- does not render anything
 app.post('/onboard', csrfProtection, (req, res) => {
   data.onboard(req.body.eventName, req.body.email).then((id) => {
-    const accessCode = crypt.Rabbit.encrypt(id, config.encryptionKey).toString()
+    const accessCode = encodeURIComponent(
+      crypt.Rabbit.encrypt(id, config.encryptionKey).toString()
+    )
 
     console.log(accessCode)
+    mailer.sendAccessCode(req.body.email, req.body.eventName, accessCode)
 
     res.redirect(
       url.format({
@@ -147,8 +120,10 @@ app.post('/onboard', csrfProtection, (req, res) => {
 // separate page to prevent form resubmission
 app.get('/onboard', (req, res) => {
   if (req.query.access) {
+    const access = decodeURIComponent(req.query.access)
+
     const recordId = crypt.Rabbit.decrypt(
-      req.query.access,
+      access,
       config.encryptionKey
     ).toString(crypt.enc.Utf8)
 
@@ -183,10 +158,10 @@ app.get('/onboard', (req, res) => {
 })
 
 app.get('/next', async (req, res) => {
-  const recordId = crypt.Rabbit.decrypt(
-    req.query.access,
-    config.encryptionKey
-  ).toString(crypt.enc.Utf8)
+  const access = decodeURIComponent(req.query.access)
+  const recordId = crypt.Rabbit.decrypt(access, config.encryptionKey).toString(
+    crypt.enc.Utf8
+  )
 
   data.getDataById(recordId).then((data) => {
     console.log(data)
@@ -211,108 +186,8 @@ app.get('/scheduled', (req, res) => {
   res.render('scheduled', { title: 'Meeting Scheduled', layout: 'custom' })
 })
 
-app.get(
-  '/auth',
-  passport.authenticate('google', {
-    hd: 'executebig.org',
-    prompt: 'select_account',
-    scope: ['profile', 'email'] // Used to specify the required data
-  })
-)
-
-app.get('/auth/callback', passport.authenticate('google'), (req, res) => {
-  res.redirect('/admin')
-})
-
-app.get('/denied', (req, res) => {
-  res.render('denied', { title: 'Access Denied' })
-})
-
-app.get('/auth/logout', (req, res) => {
-  req.logout()
-  res.redirect('/')
-})
-
-// Protect full site with simple auth
-const adminRouter = express.Router()
-app.use('/admin', adminRouter)
-
-adminRouter.use(isUserAuthenticated)
-
-adminRouter.get('/', (req, res) => {
-  submissions = data.loadSubmissions()
-  let submissionsPromise = Promise.resolve(submissions)
-  submissionsPromise.then((d) => {
-    res.render('dashboard', {
-      title: 'Research Dashboard',
-      layout: 'admin',
-      data: d,
-      n: d.length,
-      userData: req.userData
-    })
-  })
-})
-
-adminRouter.get('/email', (req, res) => {
-  res.render('email', {
-    title: 'Auto Email',
-    layout: 'admin',
-    userData: req.userData
-  })
-})
-
-adminRouter.post('/email', (req, res) => {
-  // Accept variables
-  let to = req.body.to.split(',').map((d) => d.trim())
-  let from = req.body.from
-  let subject = req.body.subject.trim()
-  let html = convertMd
-    .makeHtml(req.body.content)
-    .replace(/(\r\n|\n|\r)/gm, '<br />')
-  let plaintext = removeMd(req.body.content)
-
-  console.log({
-    to,
-    from,
-    subject,
-    html,
-    plaintext
-  })
-
-  if (addrCheck(to)) {
-    mailer
-      .send(from, to, subject, html, plaintext)
-      .then((d) => {
-        res.send('Success! + ' + d)
-      })
-      .catch((err) => {
-        res.send('Error! ' + err)
-      })
-  } else {
-    res.send(`Error! Invalid destination email ${checkResult[1]}`)
-  }
-})
-
-adminRouter.get('/submission/:id', (req, res) => {
-  submission = data.getDataById(req.params.id)
-  let submissionPromise = Promise.resolve(submission)
-  submissionPromise.then((d) => {
-    console.log(d)
-    res.render('submission', {
-      title: `Submission #${d[0]['Autonumber']}`,
-      layout: 'admin',
-      data: d[0],
-      noTabs: true,
-      userData: req.userData
-    })
-  })
-})
-
-adminRouter.post('/update/:id', async (req, res) => {
-  await data.updateStats(req.params.id, req.body)
-
-  res.redirect('/admin')
-})
+app.use('/auth', require('./routes/auth'))
+app.use('/admin', isUserAuthenticated, require('./routes/admin'))
 
 app.listen(config.port, () => console.log(`Quest listening at ${config.host}`))
 

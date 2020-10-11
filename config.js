@@ -17,5 +17,6 @@ module.exports = {
   mail: {
     api_key: process.env.SENDGRID_KEY
   },
-  bugsnagKey: process.env.BUGSNAG_KEY
+  bugsnagKey: process.env.BUGSNAG_KEY,
+  noEmail: true // debug
 }

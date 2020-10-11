@@ -65,7 +65,7 @@ const loadPublicData = async () => {
     .then((records) => {
       for (const i in records) {
         const r = records[i]._rawJson.fields
-        
+
         if (r['Logo']) {
           publicList.push({
             name: r['Event Name'],
