@@ -10,7 +10,7 @@ const minifyHTML = require('express-minify-html')
 const compression = require('compression')
 const cors = require('cors')
 const sassMiddleware = require('node-sass-middleware')
-const cookieSession = require('cookie-session')
+const expressSession = require('express-session')
 const csrf = require('csurf')
 const passport = require('./services/passport')
 
@@ -24,11 +24,16 @@ const hbs = exphbs.create({ helpers: helpers, extname: '.hbs' })
 
 const csrfProtection = csrf({ cookie: true })
 
+app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(
-  cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
-    keys: [config.sessionKey]
+  expressSession({
+    secret: config.sessionKey,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: false
+    }
   })
 )
 app.use(passport.initialize())
