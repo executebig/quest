@@ -94,7 +94,7 @@ app.get('/api/public', async (req, res) => {
 app.use('/static', express.static(path.join(__dirname, 'static')))
 
 app.get('/', csrfProtection, (req, res) => {
-  res.render('landing', {
+  res.render('landing-dev', {
     title: 'Welcome',
     nonav: true,
     csrfToken: req.csrfToken()
