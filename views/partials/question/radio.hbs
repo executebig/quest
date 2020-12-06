@@ -1,0 +1,12 @@
+<div class="field">
+  <label class="label{{#if required}} required{{/if}}">{{label}}</label>
+</div>
+<div class="radio-set">
+{{#each option}}
+    <div class="field mt-4">
+        <input class="is-checkradio is-brand" id="{{../name}}-{{@index}}" type="radio" value="{{value}}" name="{{../name}}">
+        <label for="{{../name}}-{{@index}}">{{option}}</label>
+    </div>
+{{/each}}
+</div>
+<p class="help">{{help}}</p>

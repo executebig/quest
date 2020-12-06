@@ -1,0 +1,231 @@
+@charset "utf-8";
+
+$colors: null;
+
+$primary: #266dd3;
+$secondary: #dd6e42;
+$dark: #2f2f41;
+
+$family-primary: 'Inter', sans-serif;
+$family-secondary: 'Nunito', Helvetica, Arial, sans-serif, -apple-system;
+
+@import '../node_modules/bulma/sass/utilities/_all';
+@import '../node_modules/@creativebulma/bulma-divider/src/sass/index.sass';
+@import '../node_modules/bulma-calendar/src/sass/index.sass';
+@import '../node_modules/bulma-checkradio/src/sass/index.sass';
+
+body {
+  font-family: $family-primary;
+  color: #2f2f41;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+html,
+button,
+input,
+select,
+textarea {
+  font-family: $family-primary;
+  color: #2f2f41;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+.title,
+.subtitle {
+  font-family: $family-secondary;
+  font-weight: 900;
+  color: #2f2f41;
+
+  &.is-brand {
+    color: $primary;
+    line-height: 1.5;
+  }
+}
+
+p {
+  line-height: 2;
+  font-size: 1.2rem;
+
+  &:not(:first-child) {
+    margin-top: 1rem;
+  }
+}
+.Site-Content {
+  flex: 1;
+}
+.hero {
+  user-select: none;
+  position: relative;
+  img.hero-pig {
+    position: absolute;
+    right: -5%;
+    opacity: 0.2;
+    height: 125%;
+    top: -12.5%;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+  }
+  .hero-body {
+    padding: 4rem 1.5rem;
+
+    .title {
+      color: $primary;
+    }
+  }
+}
+.navbar {
+  border-bottom: 2px solid #f6f7ff;
+  padding: 5px 0;
+
+  .navbar-brand {
+    .navbar-item {
+      img {
+        max-height: 2.3rem;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+      }
+    }
+  }
+}
+span.is-branding {
+  color: $primary;
+  font-weight: 800;
+}
+img.is-logo {
+  margin: 0 20px;
+  padding: 0 5px;
+}
+a.is-disabled {
+  color: gray;
+  cursor: not-allowed;
+}
+.panel-heading {
+  .hint {
+    font-size: 70%;
+    opacity: 0.6;
+  }
+  .live-dot {
+    margin: 10px;
+    color: $secondary;
+    animation: pulse 2s infinite;
+  }
+  font-family: $family-secondary;
+  font-size: 18px;
+}
+.button.is-brand {
+  white-space: nowrap;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 14px;
+  background: $primary;
+  border-radius: 4px;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: #fff;
+  text-decoration: none !important;
+  transition: all 0.15s ease;
+  font-family: $family-secondary;
+  margin-top: 1rem;
+
+  &:hover {
+    color: #fff;
+    background-color: #4d89df;
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+}
+.hero.is-brand {
+  background-color: $primary;
+  .is-branding {
+    color: #fff;
+  }
+}
+.field {
+  margin-top: 1.5rem;
+}
+.label {
+  font-family: $family-secondary;
+  font-size: 18px;
+}
+.label.required {
+  &::after {
+    content: '*';
+    color: #dd6e42;
+    margin-left: 2px;
+  }
+}
+.hidden {
+  display: none;
+}
+#copyright {
+  font-weight: 800;
+  color: #fff !important;
+  font-family: $family-secondary;
+  cursor: default;
+  &:focus {
+    outline: -webkit-focus-ring-color auto 1px;
+  }
+}
+#serverStat {
+  font-size: 14px;
+}
+.footer.branded {
+  margin-top: 2rem;
+  padding: 2rem 1.5rem 1.5rem;
+  background-color: $primary;
+  color: #fff;
+  .is-hint {
+    color: lightgray;
+  }
+  a {
+    color: #fff;
+  }
+  strong {
+    color: #fff;
+  }
+}
+.is-hint {
+  color: lightslategrey;
+}
+.message-header {
+  font-family: $family-secondary;
+  font-size: 18px;
+}
+.panel {
+  margin-top: 1rem;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.is-checkradio[type='radio'].is-brand:checked + label::after,
+.is-checkradio[type='radio'].is-brand:checked + label:after {
+  border-color: $primary;
+  background-color: $primary;
+}
+
+.is-checkradio[type='radio'].is-brand:hover:not([disabled]) + label::before,
+.is-checkradio[type='radio'].is-brand:hover:not([disabled]) + label:before,
+.is-checkradio[type='checkbox'].is-brand:hover:not([disabled]) + label::before,
+.is-checkradio[type='checkbox'].is-brand:hover:not([disabled]) + label:before {
+  border-color: $primary !important;
+}
+
+@import '../node_modules/bulma/bulma.sass';
