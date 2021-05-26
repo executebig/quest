@@ -290,10 +290,10 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
-bulma-calendar@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/bulma-calendar/-/bulma-calendar-6.1.0.tgz#2fb5bbdf92eef9bf0578f0d339ad790482ce8c96"
-  integrity sha512-KjODRyJSRuSoYKButVWFsxWgoJDt1VWC7gXqcRMNVM/mqGuw1ivygvteKtYVZ0e99kQwUEwMNHGrXI/JsQig3g==
+bulma-calendar@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/bulma-calendar/-/bulma-calendar-6.1.2.tgz#244ee5b627a3dc2d10108d684bbe49a360701a8f"
+  integrity sha512-cV951iitHWGqfPR1LzIysMBZ+HjD/PWyvijtoGNbdv/qiZIpUNHWEIubvHsiatClUBaCG5w8Gb2Jh2aBAgcXHg==
   dependencies:
     date-and-time "^0.14.2"
     date-fns "^1.29.0"
