@@ -290,13 +290,13 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
-bulma-calendar@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/bulma-calendar/-/bulma-calendar-6.1.0.tgz#2fb5bbdf92eef9bf0578f0d339ad790482ce8c96"
-  integrity sha512-KjODRyJSRuSoYKButVWFsxWgoJDt1VWC7gXqcRMNVM/mqGuw1ivygvteKtYVZ0e99kQwUEwMNHGrXI/JsQig3g==
+bulma-calendar@^6.1.3:
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/bulma-calendar/-/bulma-calendar-6.1.3.tgz#d80274abca5cf073d944e02e045686f955bcc523"
+  integrity sha512-W2ejJfZGV7a7PCS5zYYjDeiONxSBBtTPcrxitUaU6A9mnzfYzClrBWQcwVp5HnOXZKJlL1Aunw03RM0TsDHPSg==
   dependencies:
     date-and-time "^0.14.2"
-    date-fns "^1.29.0"
+    date-fns "^2.21.3"
 
 bulma-checkradio@^1.1.1:
   version "1.1.1"
@@ -561,10 +561,10 @@ date-and-time@^0.14.2:
   resolved "https://registry.yarnpkg.com/date-and-time/-/date-and-time-0.14.2.tgz#a4266c3dead460f6c231fe9674e585908dac354e"
   integrity sha512-EFTCh9zRSEpGPmJaexg7HTuzZHh6cnJj1ui7IGCFNXzd2QdpsNh05Db5TF3xzJm30YN+A8/6xHSuRcQqoc3kFA==
 
-date-fns@^1.29.0:
-  version "1.30.1"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
-  integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
+date-fns@^2.21.3:
+  version "2.22.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.22.1.tgz#1e5af959831ebb1d82992bf67b765052d8f0efc4"
+  integrity sha512-yUFPQjrxEmIsMqlHhAhmxkuH769baF21Kk+nZwZGyrMoyLA+LugaQtC0+Tqf9CBUUULWwUJt6Q5ySI3LJDDCGg==
 
 debug@2.6.9:
   version "2.6.9"
