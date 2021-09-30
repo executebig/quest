@@ -298,15 +298,17 @@ bulma-calendar@^6.1.0:
     date-and-time "^0.14.2"
     date-fns "^1.29.0"
 
-bulma-checkradio@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/bulma-checkradio/-/bulma-checkradio-1.1.1.tgz#d94c4bce810089957102670b19cafb194bcb97be"
-  integrity sha512-6Wn2faBiFkctSeiaQkeU2MbjkQeuXsN4AthBDEKrHGGPl5wmV2GEj4iZCqzvw7Te7baaHdU8PbUgrmlD5D6oGA==
+bulma-checkradio@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/bulma-checkradio/-/bulma-checkradio-2.1.2.tgz#7b2095b3f491f9621645ff2e7876a33882ed3f60"
+  integrity sha512-pKXV/3ipaz1yordNC1Hm37gfT0lrfrIcrAkbF49TgdBlXTiP0EM/faznOTxuZOSgWyYkO8pSsx97Q8sc1rnRwQ==
+  dependencies:
+    bulma "^0.9.3"
 
-bulma@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.9.2.tgz#340011e119c605f19b8ca886bfea595f1deaf23c"
-  integrity sha512-e14EF+3VSZ488yL/lJH0tR8mFWiEQVCMi/BQUMi2TGMBOk+zrDg4wryuwm/+dRSHJw0gMawp2tsW7X1JYUCE3A==
+bulma@^0.9.2, bulma@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.9.3.tgz#ddccb7436ebe3e21bf47afe01d3c43a296b70243"
+  integrity sha512-0d7GNW1PY4ud8TWxdNcP6Cc8Bu7MxcntD/RRLGWuiw/s0a9P+XlH/6QoOIrmbj6o8WWJzJYhytiu9nFjTszk1g==
 
 byline@^5.0.0:
   version "5.0.0"
