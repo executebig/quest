@@ -27,7 +27,7 @@
     "handlebars-dateformat": "^1.1.1",
     "lodash": "^4.17.21",
     "lodash.merge": "^4.6.2",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.0.0",
     "node-sass-middleware": "^0.11.0",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
