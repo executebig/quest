@@ -15,7 +15,7 @@
     "bulma-checkradio": "^2.1.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
-    "cookie-session": "^1.4.0",
+    "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.0.0",
     "csurf": "^1.11.0",
